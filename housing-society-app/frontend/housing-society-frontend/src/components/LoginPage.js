@@ -1,15 +1,37 @@
 import React, { useState } from 'react';
+import axios from 'axios'; // Import axios
 
 function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(''); // State to handle login errors
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    // Here you would typically send a request to your backend for authentication
-    console.log('Attempting to login with:', { username, password });
-    // Add your backend integration logic here
-    // Example: axios.post('/api/login', { username, password }).then(...)
+    setError(''); // Clear previous errors
+
+    try {
+      // Replace with your actual backend login URL
+      const response = await axios.post('http://localhost:8080/api/login', { 
+        username, 
+        password 
+      });
+
+      // Assuming your backend returns a success status or token on successful login
+      if (response.status === 200) {
+        console.log('Login successful!', response.data);
+        // TODO: Handle successful login (e.g., store token, redirect)
+      } else {
+        setError('Login failed. Please check your credentials.'); // Basic error message
+      }
+    } catch (error) {
+      console.error('Error during login:', error);
+      if (error.response && error.response.status === 401) {
+        setError('Invalid username or password.');
+      } else {
+        setError('An error occurred during login. Please try again.');
+      }
+    }
   };
 
   return (
@@ -20,7 +42,7 @@ function LoginPage() {
         </div>
         <form onSubmit={handleLogin}>
           <div className="mt-4">
-            <label className="block" htmlFor="username">UserName :</label>
+i n            <label className="block" htmlFor="username">UserName :</label>
             <input
               type="text"
               placeholder=""
@@ -44,6 +66,7 @@ function LoginPage() {
             <a href="#" className="text-sm text-blue-600 hover:underline">Forgot Password ?</a>
           </div>
         </form>
+        {error && <p style={{ color: 'red', marginTop: '10px' }}>{error}</p>} {/* Display error message */}
       </div>
     </div>
   );
