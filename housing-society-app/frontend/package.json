@@ -1,5 +1,10 @@
 {
-  "name": "frontend",
-  "version": "0.1.0",
-  "private": true
+  "name": "housing-society-app",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "concurrently "mvn spring-boot:run --prefix ../backend/housing-society-backend" "npm run start --prefix frontend""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
 }

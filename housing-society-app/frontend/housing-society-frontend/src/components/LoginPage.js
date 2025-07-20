@@ -1,75 +1,97 @@
 import React, { useState } from 'react';
-import axios from 'axios'; // Import axios
 
 function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(''); // State to handle login errors
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    setError(''); // Clear previous errors
-
-    try {
-      // Replace with your actual backend login URL
-      const response = await axios.post('http://localhost:8080/api/login', { 
-        username, 
-        password 
-      });
-
-      // Assuming your backend returns a success status or token on successful login
-      if (response.status === 200) {
-        console.log('Login successful!', response.data);
-        // TODO: Handle successful login (e.g., store token, redirect)
-      } else {
-        setError('Login failed. Please check your credentials.'); // Basic error message
-      }
-    } catch (error) {
-      console.error('Error during login:', error);
-      if (error.response && error.response.status === 401) {
-        setError('Invalid username or password.');
-      } else {
-        setError('An error occurred during login. Please try again.');
-      }
-    }
+  const handleLogin = () => {
+    // Here you would typically send a request to your backend for authentication
+    console.log('Attempting to login with:', { username, password });
+    // Handle login logic and navigation based on backend response
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen" style={{ backgroundColor: '#d4edda' }}>
-      <div className="px-8 py-6 mt-4 text-left bg-white shadow-lg" style={{ width: '300px' }}>
-        <div style={{ backgroundColor: '#28a745', color: 'white', padding: '10px', textAlign: 'center' }}>
-          Member Login Area
+    <div style={loginPageStyle}>
+      <div style={loginContainerStyle}>
+        <h2 style={loginHeaderStyle}>Member Login Area</h2>
+        <div style={inputGroupStyle}>
+          <label style={labelStyle}>UserName :</label>
+          <input
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            style={inputStyle}
+          />
         </div>
-        <form onSubmit={handleLogin}>
-          <div className="mt-4">
-i n            <label className="block" htmlFor="username">UserName :</label>
-            <input
-              type="text"
-              placeholder=""
-              className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-          </div>
-          <div className="mt-4">
-            <label className="block" htmlFor="password">Password :</label>
-            <input
-              type="password"
-              placeholder=""
-              className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-          <div className="flex items-baseline justify-between">
-            <button type="submit" className="px-6 py-2 mt-4 text-white bg-green-600 rounded-lg hover:bg-green-800" style={{ backgroundColor: '#28a745' }}>Login</button>
-            <a href="#" className="text-sm text-blue-600 hover:underline">Forgot Password ?</a>
-          </div>
-        </form>
-        {error && <p style={{ color: 'red', marginTop: '10px' }}>{error}</p>} {/* Display error message */}
+        <div style={inputGroupStyle}>
+          <label style={labelStyle}>Password :</label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            style={inputStyle}
+          />
+        </div>
+        <button onClick={handleLogin} style={loginButtonStyle}>Login</button>
+        <a href="#" style={forgotPasswordLinkStyle}>Forgot Password ?</a>
       </div>
     </div>
   );
 }
+
+const loginPageStyle = {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  height: 'calc(100vh - 150px)', // Adjust height to account for header and footer
+};
+
+const loginContainerStyle = {
+  border: '1px solid #ccc',
+  padding: '20px',
+  borderRadius: '5px',
+  backgroundColor: '#f9f9f9',
+  textAlign: 'center',
+};
+
+const loginHeaderStyle = {
+  color: '#4CAF50', // Green color
+  marginBottom: '20px',
+};
+
+const inputGroupStyle = {
+  marginBottom: '15px',
+  textAlign: 'left',
+};
+
+const labelStyle = {
+  display: 'inline-block',
+  width: '100px',
+  marginRight: '10px',
+  fontWeight: 'bold',
+};
+
+const inputStyle = {
+  padding: '8px',
+  borderRadius: '4px',
+  border: '1px solid #ccc',
+};
+
+const loginButtonStyle = {
+  backgroundColor: '#4CAF50', // Green background
+  color: 'white',
+  padding: '10px 20px',
+  border: 'none',
+  borderRadius: '4px',
+  cursor: 'pointer',
+  marginTop: '15px',
+};
+
+const forgotPasswordLinkStyle = {
+  display: 'block',
+  marginTop: '10px',
+  color: '#4CAF50',
+  textDecoration: 'none',
+};
 
 export default LoginPage;

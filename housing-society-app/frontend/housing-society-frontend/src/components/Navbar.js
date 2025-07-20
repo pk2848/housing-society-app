@@ -1,46 +1,58 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import ThemeSwitcher from './ThemeSwitcher';
 
-function Navbar() {
+const menuItems = [
+  { label: 'Home', key: 'Home' },
+  { label: 'Login', key: 'Login' },
+  { label: 'Register', key: 'Register' },
+  { label: 'Add Complaint', key: 'AddComplaint' },
+  { label: 'Complaint List', key: 'ComplaintList' },
+  { label: 'Complaint Details', key: 'ComplaintDetails' },
+  { label: 'Edit Complaint', key: 'EditComplaint' },
+  { label: 'Add Society', key: 'AddSociety' },
+  { label: 'Edit Society', key: 'EditSociety' },
+  { label: 'Society Details', key: 'SocietyDetails' },
+  { label: 'Society List', key: 'SocietyList' },
+  { label: 'Society List Page', key: 'SocietyListPage' },
+  { label: 'Add House', key: 'AddHouse' },
+  { label: 'Edit House', key: 'EditHouse' },
+  { label: 'House Details', key: 'HouseDetails' },
+  { label: 'House List', key: 'HouseList' },
+  { label: 'Add Member', key: 'AddMember' },
+  { label: 'Header', key: 'Header' },
+  { label: 'Footer', key: 'Footer' },
+  { label: 'Theme Switcher', key: 'ThemeSwitcher' },
+];
+
+function Navbar({ onNavigate, activePage }) {
   return (
-    <nav className="bg-blue-600 dark:bg-gray-800 p-4">
-      <div className="container mx-auto flex justify-between items-center">
-        <Link to="/" className="text-white text-2xl font-bold">Housing Society App</Link>
-        <ul className="flex space-x-4 items-center">
-          <li>
-            <Link to="/" className="text-white hover:underline">Home</Link>
+    <div style={{
+      width: '250px',
+      backgroundColor: '#f0f0f0',
+      borderRight: '1px solid #ccc',
+      padding: '20px',
+      height: '100vh',
+      overflowY: 'auto'
+    }}>
+      <h2 style={{ textAlign: 'center' }}>Pages</h2>
+      <ul style={{ listStyleType: 'none', padding: 0 }}>
+        {menuItems.map(item => (
+          <li
+            key={item.key}
+            onClick={() => onNavigate(item.key)}
+            style={{
+              padding: '10px',
+              margin: '5px 0',
+              backgroundColor: activePage === item.key ? '#d0e6ff' : 'transparent',
+              cursor: 'pointer',
+              borderRadius: '4px',
+              fontWeight: activePage === item.key ? 'bold' : 'normal'
+            }}
+          >
+            {item.label}
           </li>
-          <li>
-            <Link to="/login" className="text-white hover:underline">Login</Link>
-          </li>
-          <li>
-            <Link to="/register" className="text-white hover:underline">Register</Link>
-          </li>
-          <li>
-            <Link to="/houses" className="text-white hover:underline">Houses</Link>
-          </li>
-          <li>
-            <Link to="/add-house" className="text-white hover:underline">Add House</Link>
-          </li>
-          <li>
-            <Link to="/complaints" className="text-white hover:underline">Complaints</Link>
-          </li>
-          <li>
-            <Link to="/add-complaint" className="text-white hover:underline">Add Complaint</Link>
-          </li>
-           <li>
-            <Link to="/societies" className="text-white hover:underline">Societies</Link>
-          </li>
-           <li>
-            <Link to="/add-society" className="text-white hover:underline">Add Society</Link>
-          </li>
-          <li>
-            <ThemeSwitcher /> {/* Add the ThemeSwitcher here */}
-          </li>
-        </ul>
-      </div>
-    </nav>
+        ))}
+      </ul>
+    </div>
   );
 }
 

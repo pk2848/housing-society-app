@@ -1,21 +1,22 @@
 import React from 'react';
 
-function SocietyList() {
-  // Placeholder data for society list
-  const societies = ['Shyam Park', 'Pavan City'];
-
+const SocietyList = ({ societies, onSelect }) => {
   return (
-    <div style={{ width: '200px', backgroundColor: '#f8f9fa', padding: '10px' }}>
-      <h2>Society List</h2>
-      <ul style={{ listStyle: 'none', padding: 0 }}>
+    <div className="p-4">
+      <h2 className="text-xl font-bold mb-4">Society List</h2>
+      <ul className="space-y-2">
         {societies.map((society, index) => (
-          <li key={index} style={{ marginBottom: '5px', cursor: 'pointer' }}>
-            {society}
+          <li
+            key={index}
+            onClick={() => onSelect(society)}
+            className="bg-gray-100 p-3 rounded-md hover:bg-gray-200 cursor-pointer"
+          >
+            {society.name}
           </li>
         ))}
       </ul>
     </div>
   );
-}
+};
 
 export default SocietyList;
