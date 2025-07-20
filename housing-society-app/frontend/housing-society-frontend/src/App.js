@@ -1,61 +1,67 @@
-// App.js
-import React, { useState } from 'react';
+import React from 'react';
+import { Route, Routes } from 'react-router-dom'; // Removed BrowserRouter import
 import Navbar from './components/Navbar';
-import HomePage from './components/HomePage';
-import AddComplaintPage from './components/AddComplaintPage';
-import AddHousePage from './components/AddHousePage';
-import AddMemberPage from './components/AddMemberPage';
-import AddSocietyPage from './components/AddSocietyPage';
-import ComplaintDetailsPage from './components/ComplaintDetailsPage';
-import ComplaintListPage from './components/ComplaintListPage';
-import EditComplaintPage from './components/EditComplaintPage';
-import EditHousePage from './components/EditHousePage';
-import EditSocietyPage from './components/EditSocietyPage';
-import Footer from './components/Footer';
 import Header from './components/Header';
-import HouseDetailsPage from './components/HouseDetailsPage';
-import HouseListPage from './components/HouseListPage';
+import Footer from './components/Footer';
+import HomePage from './components/HomePage';
 import LoginPage from './components/LoginPage';
 import RegistrationPage from './components/RegistrationPage';
-import SocietyDetailsPage from './components/SocietyDetailsPage';
-import SocietyList from './components/SocietyList';
 import SocietyListPage from './components/SocietyListPage';
-import ThemeSwitcher from './components/ThemeSwitcher';
+import SocietyDetailsPage from './components/SocietyDetailsPage';
+import AddSocietyPage from './components/AddSocietyPage';
+import EditSocietyPage from './components/EditSocietyPage';
+import HouseListPage from './components/HouseListPage';
+import HouseDetailsPage from './components/HouseDetailsPage';
+import AddHousePage from './components/AddHousePage';
+import EditHousePage from './components/EditHousePage';
+import ComplaintListPage from './components/ComplaintListPage';
+import ComplaintDetailsPage from './components/ComplaintDetailsPage';
+import AddComplaintPage from './components/AddComplaintPage';
+import EditComplaintPage from './components/EditComplaintPage';
+// Import other components for Allocate House, Buy/Sell List, Reports
 
 function App() {
-  const [currentPage, setCurrentPage] = useState('Home');
-
-  const renderComponent = () => {
-    switch (currentPage) {
-      case 'Navbar': return <Navbar onNavigate={setCurrentPage} />;
-      case 'Home': return <HomePage onNavigate={setCurrentPage} />;
-      case 'AddComplaint': return <AddComplaintPage onNavigate={setCurrentPage} />;
-      case 'AddHouse': return <AddHousePage onNavigate={setCurrentPage} />;
-      case 'AddMember': return <AddMemberPage onNavigate={setCurrentPage} />;
-      case 'AddSociety': return <AddSocietyPage onNavigate={setCurrentPage} />;
-      case 'ComplaintDetails': return <ComplaintDetailsPage onNavigate={setCurrentPage} />;
-      case 'ComplaintList': return <ComplaintListPage onNavigate={setCurrentPage} />;
-      case 'EditComplaint': return <EditComplaintPage onNavigate={setCurrentPage} />;
-      case 'EditHouse': return <EditHousePage onNavigate={setCurrentPage} />;
-      case 'EditSociety': return <EditSocietyPage onNavigate={setCurrentPage} />;
-      case 'Footer': return <Footer />;
-      case 'Header': return <Header />;
-      case 'HouseDetails': return <HouseDetailsPage onNavigate={setCurrentPage} />;
-      case 'HouseList': return <HouseListPage onNavigate={setCurrentPage} />;
-      case 'Login': return <LoginPage onNavigate={setCurrentPage} />;
-      case 'Registration': return <RegistrationPage onNavigate={setCurrentPage} />;
-      case 'SocietyDetails': return <SocietyDetailsPage onNavigate={setCurrentPage} />;
-      case 'SocietyList': return <SocietyList onNavigate={setCurrentPage} />;
-      case 'SocietyListPage': return <SocietyListPage onNavigate={setCurrentPage} />;
-      case 'ThemeSwitcher': return <ThemeSwitcher />;
-      default: return <HomePage onNavigate={setCurrentPage} />;
-    }
-  };
-
   return (
-    <div>
-      <Navbar onNavigate={setCurrentPage} />
-      {renderComponent()}
+    <div className="flex flex-col h-screen">
+      <Header />
+      <Navbar />
+      <div className="flex flex-grow">
+        <Routes>
+          <Route path="/" element={<HomePage />} >
+             {/* Nested routes for HomePage sidebar */}
+            <Route path="societies/add" element={<AddSocietyPage />} />
+            <Route path="houses/add" element={<AddHousePage />} />
+            <Route path="members/add" element={<div>Add Member Component (Placeholder)</div>} />
+             {/* Add nested routes for other features */}
+             {/* <Route path="allocate-house" element={<AllocateHousePage />} /> */}
+             {/* <Route path="complaints" element={<ManageComplainPage />} /> */}
+             {/* <Route path="buy-sell" element={<BuySellListPage />} /> */}
+             {/* <Route path="reports" element={<ReportsPage />} /> */}
+
+             {/* Routes for List pages that should appear on the right of sidebar */}
+             <Route path="societies" element={<SocietyListPage />} />
+             <Route path="houses" element={<HouseListPage />} />
+             <Route path="complaints" element={<ComplaintListPage />} />
+
+
+
+          </Route>
+
+          {/* Top-level routes that might not have the sidebar */}
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegistrationPage />} />
+           {/* Routes for details or edit pages that might not have the sidebar, adjust as needed */}
+          <Route path="/societies/:id" element={<SocietyDetailsPage />} />
+          <Route path="/societies/edit/:id" element={<EditSocietyPage />} />
+          <Route path="/houses/:id" element={<HouseDetailsPage />} />
+          <Route path="/houses/edit/:id" element={<EditHousePage />} />
+          <Route path="/complaints/:id" element={<ComplaintDetailsPage />} />
+          <Route path="/complaints/edit/:id" element={<EditComplaintPage />} />
+
+
+        </Routes>
+      </div>
+      <Footer />
     </div>
   );
 }
