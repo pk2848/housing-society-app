@@ -8,11 +8,14 @@ const complaints = [
 
 const ComplaintListPage = () => {
   return (
-    <div className="p-4">
-      <h2 className="text-xl font-semibold">Complaints</h2>
-      <ul className="mt-4 list-disc pl-6">
+    <div className="p-6 bg-white rounded-lg shadow-md">
+      <h2 className="text-2xl font-bold text-gray-800 mb-6">Complaints</h2>
+      <ul className="divide-y divide-gray-200">
         {complaints.map((c) => (
-          <li key={c.id} className="mb-2">{c.text}</li>
+          <li key={c.id} className="py-4">
+            <p className="text-sm font-medium text-gray-900">Complaint ID: {c.id}</p>
+            <p className="mt-1 text-sm text-gray-600">{c.text}</p>
+          </li>
         ))}
       </ul>
     </div>
