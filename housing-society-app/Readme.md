@@ -2,10 +2,6 @@
 
 A web/mobile solution to manage and interact within a residential housing society — user profiles, notices, complaints, messaging, visitor logs, and more.
 
-> **Live demo** (if available) – add your demo link here
-
----
-
 ## 🚀 About the Project
 
 The *Housing Society App* is designed to help residents and administrators of a housing society stay connected and manage daily tasks easily. From handling complaints to viewing notices and tracking visitor entries, this platform brings community management online.
@@ -25,20 +21,17 @@ This project is part of my practical portfolio showcasing full-stack development
 ✔ Search & Filter Features  
 ✔ Responsive Layout for Web & Mobile
 
-_(Update this section based on actual features implemented in your code.)_
-
 ---
 
 ## 🧠 Tech Stack
 
 | Layer | Technology |
 |-------|------------|
-| Backend | Python / Django / Flask / Node.js / FastAPI (update as per your project) |
-| Frontend | React / Next.js / HTML/CSS/JS |
-| Database | PostgreSQL / MongoDB / SQLite |
-| Deployment | Heroku / Render / AWS (optional) |
+| Backend | SpringBoot | Java 
+| Frontend | Angular / HTML/CSS/JS |
+| Database | PostgreSQL   
+| Deployment | Render|
 
-_(Replace with your actual stack used in this repo.)_
 
 ---
 
